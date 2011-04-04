@@ -2,10 +2,14 @@
 <table>
   <tr>
     <th>Email</th>
+	<th>Password</th>
+	<th>Password confirmation</th>
   </tr>
   <% for user in @users %>
     <tr>
       <td><%=h user.email %></td>
+	  <td><%=h truncate(user.encrypted_password, 25) %></td>
+	  <td><%=h truncate(user.salt, 25) %></td>
       <td><%= link_to "Show", user %></td>
       <td><%= link_to "Edit", edit_user_path(user) %></td>
       <td><%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %></td>

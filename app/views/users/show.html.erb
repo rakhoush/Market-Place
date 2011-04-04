@@ -6,6 +6,16 @@
 </p>
 
 <p>
+	<strong>Encrypted password</strong>
+	<%=h @user.encrypted_password %>
+</p>
+
+<p>
+	<strong>Salt</strong>
+	<%=h @user.salt %>
+</p>
+
+<p>
   <%= link_to "Edit", edit_user_path(@user) %> |
   <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", users_path %>

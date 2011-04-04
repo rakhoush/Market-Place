@@ -1,4 +1,7 @@
 <h1>New user</h1>
-<%= render :partial => 'form' %>
+<% form_for @user do |f| %>
+<%= render :partial => 'form', :locals => {:f => f} %>
+<p><%= f.submit %></p>
+<% end %>
 
 <p><%= link_to "Back to List", users_path %></p>

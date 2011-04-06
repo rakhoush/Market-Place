@@ -7,6 +7,7 @@
 #  email      :string(255)
 #  encrypted_password :string(255)
 #  salt :string(255)
+#  name :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -15,8 +16,9 @@
 require 'digest'
 
 class User < ActiveRecord::Base
+
   attr_accessor :password
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation, :name
   
   #Email validations
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -25,11 +27,20 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :message => "has been already taken", :case_sensitive => false
   
   #Creates the virtual attribute password_confirmation
-  validates_confirmation_of :password, :message => "should match confirmation"
+  validates_confirmation_of :password, :on => :create
   
   #Password validations
-  validates_presence_of :password, :message => "can't be blank"
-  validates_length_of :password, :within => 6..40, :message => "must be between 6 and 40 characters"
+  validates_presence_of :password, :on => :create
+  validates_length_of :password, :within => 6..40, :on => :create
+  
+  #Name validations
+  validates_presence_of :name, :message => "can't be blank"
+  validates_length_of :name, :within => 3..20, :message => "must be present"
+  
+  #update validations
+  validates_confirmation_of :password, :on => :update, :if => :password_changed?
+  validates_presence_of :password, :on => :update, :if => :password_changed?
+  validates_length_of :password, :within => 6..40, :on => :update, :if => :password_changed?
   
   before_save :encrypt_password
   
@@ -57,6 +68,12 @@ class User < ActiveRecord::Base
   
   def secure_hash(string)
     Digest::SHA2.hexdigest(string)
+  end
+  
+  protected
+  
+  def password_changed?
+    encrypt(password) != self.encrypted_password || password.blank?
   end
   
 end

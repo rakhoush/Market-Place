@@ -1,12 +1,14 @@
 <h1>Listing all users</h1>
 <table>
   <tr>
+	<th>Name</th>
     <th>Email</th>
 	<th>Password</th>
 	<th>Password confirmation</th>
   </tr>
   <% for user in @users %>
     <tr>
+	  <td><%=h user.name %></td>
       <td><%=h user.email %></td>
 	  <td><%=h truncate(user.encrypted_password, 25) %></td>
 	  <td><%=h truncate(user.salt, 25) %></td>

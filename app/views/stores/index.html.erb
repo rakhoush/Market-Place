@@ -1,0 +1,28 @@
+<h1>Listing all stores</h1>
+<table>
+  <tr>
+	<th>Name</th>
+	<th>Email</th>
+    <th>Zip</th>
+    <th>Street</th>
+    <th>Number</th>
+    <th>District</th>
+  </tr>
+  <% for store in @stores %>
+    <tr>
+	  <td><%=h store.user.name %></td>
+	  <td><%=h store.user.email %></td>
+      <td><%=h store.zip %></td>
+      <td><%=h store.street %></td>
+      <td><%=h store.number %></td>
+      <td><%=h store.district %></td>
+      <td><%= link_to "Show", store %></td>
+      <td><%= link_to "Edit", edit_store_path(store) %></td>
+      <td><%= link_to "Destroy", store, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Store", new_store_path %>
+<%= link_to "List of users", users_path %>
+</p>

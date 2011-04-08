@@ -31,7 +31,6 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    
     if @user.update_attributes(params[:user])
       
       flash[:notice] = "Successfully updated user."
@@ -47,4 +46,16 @@ class UsersController < ApplicationController
     flash[:notice] = "Successfully destroyed user."
     redirect_to users_url
   end
+  
+  private
+  
+  def find_userable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return $1.classify.constantize.find(value)
+      end
+    end
+    nil
+  end
+  
 end

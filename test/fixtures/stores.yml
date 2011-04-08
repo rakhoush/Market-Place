@@ -1,0 +1,25 @@
+# == Schema Information
+# Schema version: 20110407160817
+#
+# Table name: stores
+#
+#  id         :integer(4)      not null, primary key
+#  zip        :string(255)
+#  street     :string(255)
+#  number     :string(255)
+#  district   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+one:
+  zip: MyString
+  street: MyString
+  number: MyString
+  district: MyString
+
+two:
+  zip: MyString
+  street: MyString
+  number: MyString
+  district: MyString

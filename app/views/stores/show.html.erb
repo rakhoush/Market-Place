@@ -1,0 +1,34 @@
+<h1>Showing store</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @store.user.name %>
+</p>
+
+<p>
+  <strong>E-mail:</strong>
+  <%=h @store.user.email %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%=h @store.zip %>
+</p>
+<p>
+  <strong>Street:</strong>
+  <%=h @store.street %>
+</p>
+<p>
+  <strong>Number:</strong>
+  <%=h @store.number %>
+</p>
+<p>
+  <strong>District:</strong>
+  <%=h @store.district %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_store_path(@store) %> |
+  <%= link_to "Destroy", @store, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", stores_path %>
+</p>

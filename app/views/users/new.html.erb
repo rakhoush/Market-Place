@@ -1,6 +1,15 @@
 <h1>New user</h1>
 <% form_for @user do |f| %>
 <%= render :partial => 'form', :locals => {:f => f} %>
+<p>
+	<%= f.label :password %><br />
+	<%= f.password_field :password %>
+  </p>
+
+<p>
+	<%= f.label :password_confirmation, "Confirm your password" %><br />
+	<%= f.password_field :password_confirmation %>
+  </p>
 <p><%= f.submit %></p>
 <% end %>
 

@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110404143341) do
+ActiveRecord::Schema.define(:version => 20110407163431) do
+
+  create_table "stores", :force => true do |t|
+    t.string   "zip"
+    t.string   "street"
+    t.string   "number"
+    t.string   "district"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -18,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20110404143341) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.string   "name"
+    t.integer  "userable_id"
+    t.string   "userable_type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

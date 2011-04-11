@@ -62,13 +62,20 @@ class User < ActiveRecord::Base
         return nil  if user.nil?
         return user if user.has_password?(submitted_password)
     end
+    
+    def remember_me!
+        self.remember_token = encrypt("#{salt}--#{id}--#{Time.now.utc}")
+        save_without_validation
+    end
 
   private
   
   def encrypt_password
     if self.new_record?
-      self.salt = make_salt
-      self.encrypted_password = encrypt(password)
+      unless password.nil?
+        self.salt = make_salt
+        self.encrypted_password = encrypt(password)
+      end
     end
   end
   

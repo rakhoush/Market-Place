@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :categories
+
+  map.resources :products
+
   map.resources :stores, :has_one => :user
   map.resources :sessions, :only => [:new, :create, :destroy]
   map.signup '/signup', :controller => "stores", :action => "new"

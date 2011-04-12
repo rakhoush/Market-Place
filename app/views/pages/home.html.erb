@@ -2,7 +2,8 @@
 
 <% if signed_in? %>
 	<% if current_user.admin? %>
-		<%= link_to "List of stores", stores_path %>
-		<%= link_to "List of users", users_path %>
+		<%= link_to "List of stores", stores_path %> | 
+		<%= link_to "List of users", users_path %> |
+		<%= link_to "List of categories", categories_path %> |
 	<% end  %>
 <% end %>

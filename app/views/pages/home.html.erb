@@ -1,1 +1,8 @@
 <h1>MarketPlace Home Page</h1>
+
+<% if signed_in? %>
+	<% if current_user.admin? %>
+		<%= link_to "List of stores", stores_path %>
+		<%= link_to "List of users", users_path %>
+	<% end  %>
+<% end %>

@@ -12,9 +12,13 @@
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>
 
+	<div style="float:left;">
+		<%= link_to "Home", root_path %>
+	</div>
+
 		<div id="sign-info" style="float:right;">
 			<% if signed_in? %>
-				Welcome, <%= link_to "#{current_user.name.titleize}", store_path(identify_user) %><br />
+				Welcome, <%= link_to "#{current_user.name.titleize}", identify_user %><br />
 				Not you?, <%= link_to "Sign out", signout_path, :method => :delete %>
 			<% else %>
 				<%= link_to "Log in", signin_path %> | <%= link_to "Sign In", signup_path %>

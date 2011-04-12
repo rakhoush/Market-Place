@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110411065800) do
+ActiveRecord::Schema.define(:version => 20110412051339) do
 
   create_table "stores", :force => true do |t|
     t.string   "zip"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20110411065800) do
     t.integer  "userable_id"
     t.string   "userable_type"
     t.string   "remember_token"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

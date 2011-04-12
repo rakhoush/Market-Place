@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+ 
+  before_filter :not_admin
+ 
   def index
     @users = User.all
     @title = "All users"

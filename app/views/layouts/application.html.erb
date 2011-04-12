@@ -14,10 +14,10 @@
 
 		<div id="sign-info" style="float:right;">
 			<% if signed_in? %>
-				Welcome, <%= link_to "#{current_user.name.titleize}", current_user %><br />
+				Welcome, <%= link_to "#{current_user.name.titleize}", store_path(identify_user) %><br />
 				Not you?, <%= link_to "Sign out", signout_path, :method => :delete %>
 			<% else %>
-				<%= link_to "Log in", signin_path %>
+				<%= link_to "Log in", signin_path %> | <%= link_to "Sign In", signup_path %>
 			<% end  %>
 		</div>
       <%= yield %>

@@ -1,4 +1,9 @@
 class StoresController < ApplicationController
+  
+  before_filter :authenticate, :except => [:show, :new, :create]
+  before_filter :not_admin, :only => [:index, :destroy]
+  before_filter :correct_user, :only => [:edit, :update]
+  
   def index
     @stores = Store.all
     @title = "All users"
@@ -19,7 +24,8 @@ class StoresController < ApplicationController
     @store = Store.new(params[:store])
     @user = @store.build_user(params[:user])
     if @store.save
-      flash[:notice] = "Successfully created store."
+      sign_in @user
+      flash[:notice] = "Welcome back #{@user.name.titleize}"
       redirect_to @store
     else
       render :action => 'new'
@@ -36,8 +42,8 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
     @user = User.find_by_userable_id(@store.id)
     if @store.update_attributes(params[:store]) and @user.update_attributes(params[:user])
-      flash[:notice] = "Successfully updated store."
-      redirect_to @store
+      flash[:notice] = "Profile succesfully updated"
+      redirect_to :back
     else
       render :action => 'edit'
     end

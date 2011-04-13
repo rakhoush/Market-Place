@@ -13,5 +13,17 @@ namespace :db do
                       :category_id => category_id)
       
     end
+    
+    5000.times do |n|
+    author = Faker::Name.name
+    content = "Some dummy content from #{author}"
+    commentable_id = rand(500) + 1
+    commentable_type = "Product"
+    Comment.create!(:author => author,
+                    :content => content,
+                    :commentable_id => commentable_id,
+                    :commentable_type => commentable_type)
+    end
+    
   end
 end

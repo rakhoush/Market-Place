@@ -14,6 +14,34 @@
   <%=h @product.description %>
 </p>
 
+<h1>Comments for the product (<%= pluralize (@product.comments.count, "comment") %>)</h1>
+
+<% @product.comments.each do |c| %>
+<div style="background-color:#ccc;border:1px solid black;">
+	<i><span style="float:right;color:#666;font-size:10px;">Posted on <%= c.created_at.strftime("%d %b %Y") %></span></i>
+	<h4><%= c.author.titleize %></h4>
+	<p><%= c.content.capitalize %></p>
+</div>
+<br />
+<% end %>
+
+<% form_for(:comment, :url => comments_path) do |f| %>
+  <div class="field">
+    <%= f.label :author %><br />
+    <%= f.text_field :author %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+
+	<%= f.hidden_field :commentable_id, :value => "#{params[:id]}" %>
+	<%= f.hidden_field :commentable_type, :value => "Product" %>
+  <div class="actions">
+    <%= f.submit "Post comment" %>
+  </div>
+<% end %>
+
 <p>
   <%= link_to "Edit", edit_product_path(@product) %> |
   <%= link_to "Destroy", @product, :confirm => 'Are you sure?', :method => :delete %> |

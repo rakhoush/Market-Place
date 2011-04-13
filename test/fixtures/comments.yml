@@ -1,0 +1,11 @@
+one:
+  author: MyString
+  content: MyText
+  commentable_id: 1
+  commentable_type: MyString
+
+two:
+  author: MyString
+  content: MyText
+  commentable_id: 1
+  commentable_type: MyString

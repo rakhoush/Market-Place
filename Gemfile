@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 gem "rails", "~> 2.3.11"
 gem 'faker', '0.9.5'
-
+gem 'mysql'
 # bundler requires these gems in all environments
 # gem "nokogiri", "1.4.2"
 # gem "geokit"

@@ -9,5 +9,14 @@ module ApplicationHelper
       "#{base_title} :: #{h(@title)}"
     end
   end
+
+  
+  def find_current_cart
+   if session[:cart].nil?
+     Cart.new.all_items
+   else
+      session[:cart].all_items
+   end
+  end
   
 end

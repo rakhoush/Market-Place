@@ -4,8 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   include SessionsHelper
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
-
+  protect_from_forgery :secret => '8fc080370e56e929a2d5afca5540a0f7'# See ActionController::RequestForgeryProtection for details
 
     def authenticate
       deny_access unless signed_in?
@@ -25,6 +24,28 @@ class ApplicationController < ActionController::Base
         redirect_to(root_path) unless current_user?(store) or current_user.admin?
       end
     end
+    
+    def find_cart
+      session[:cart] ||= Cart.new
+    end
+    
+    def add_to_cart
+      product = Product.find(params[:id])
+      @cart = find_cart
+      @cart.add_product(product)
+      redirect_to current_user
+    rescue ActiveRecord::RecordNotFound
+      logger.error("Attempt to access invalid product #{params[:id]}" )
+      flash[:error] = "Can't add the product because is invalid"
+      redirect_to products_path
+    end
+    
+    def empty_cart
+      session[:cart] = nil
+      flash[:notice] = "Your cart is currently empty"
+      redirect_to products_path
+    end
+    
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 end

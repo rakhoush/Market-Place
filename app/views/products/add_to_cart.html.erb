@@ -1,0 +1,11 @@
+<h1>Your shopping cart contents</h1>
+
+<h3>You have <%= pluralize(@cart.all_items, "item") %> in the cart</h3>
+
+<ul>
+	<% for item in @cart.items %>
+		<li><%= item.quantity %> &times; <%=h item.name.titleize %></li>
+		<% end %>
+</ul>
+
+<%= button_to 'Empty cart', :action => 'empty_cart' %>

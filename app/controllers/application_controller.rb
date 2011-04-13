@@ -29,11 +29,22 @@ class ApplicationController < ActionController::Base
       session[:cart] ||= Cart.new
     end
     
+    def remove_from_cart
+      product = Product.find(params[:id])
+      cart = find_cart
+      items = cart.items
+      current_item = items.find {|item| item.product == product}
+      if current_item
+        items.delete_if{|i| i == current_item}
+        redirect_to products_path
+      end
+    end
+    
     def add_to_cart
       product = Product.find(params[:id])
       @cart = find_cart
       @cart.add_product(product)
-      redirect_to current_user
+      redirect_to products_path
     rescue ActiveRecord::RecordNotFound
       logger.error("Attempt to access invalid product #{params[:id]}" )
       flash[:error] = "Can't add the product because is invalid"

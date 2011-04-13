@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
   
-  before_filter :not_admin, :except => [:index, :show]
+  before_filter :not_admin, :only => [:create, :new, :edit, :update, :destroy]
   
   def index
+    @cart = find_cart
     @products = Product.all
   end
 
@@ -42,7 +43,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    cart = session[:cart]
     @product = Product.find(params[:id])
+    cart.remove_product(@product)
     @product.destroy
     flash[:notice] = "Successfully destroyed product."
     redirect_to products_url

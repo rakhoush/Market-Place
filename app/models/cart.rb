@@ -22,5 +22,22 @@ class Cart
       end
   end
   
+  def remove_product(product)
+    current_item = @items.find {|item| item.product == product}
+    if current_item
+      @items.delete_if{|i| i == current_item}
+    end
+    
+  end
+  
+  def find_item(product)
+     current_item = @items.find {|item| item.product == product}
+      if current_item
+        true
+      else
+      false
+    end
+  end
+  
   
 end

@@ -1,4 +1,14 @@
 <h1>MarketPlace Home Page</h1>
+<br />
+<h2>News Feeds</h2>
+<% @feeds.each do |feed|  %>
+<div style="background-color:#ccc;border:1px solid black;">
+	<i><span style="float:right;color:#666;font-size:10px;">Posted on <%= feed.created_at.strftime("%d %b %Y") %></span></i>
+	<h2><%= feed.title.titleize %></h2>
+	<h4><%= feed.author.titleize %></h4>
+	<p><%= feed.content.capitalize %></p>
+</div>
+<% end  %>
 
 <% if signed_in? %>
 	<% if current_user.admin? %>

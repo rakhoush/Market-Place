@@ -21,7 +21,7 @@
 				Welcome, <%= link_to "#{current_user.name.titleize}", identify_user %><br />
 				Not you?, <%= link_to "Sign out", signout_path, :method => :delete %>
 			<% else %>
-				<%= link_to "Log in", signin_path %> | <%= link_to "Sign Up", signup_path %>
+				<%= link_to "Log in", signin_path %> | <%= link_to "Sign In", signup_path %>
 			<% end  %>
 		</div>
       <%= yield %>

@@ -1,4 +1,7 @@
 class FeedsController < ApplicationController
+  
+  before_filter :not_admin, :except => [:show]
+  
   def index
     @feeds = Feed.all
   end

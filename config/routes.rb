@@ -13,7 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signout '/signout', :controller => "sessions", :action => "destroy"
   map.resources :users
   map.root :controller => "pages", :action => "home"
-  map.cart 'cart_content', :controller => "pages", :action => "cart_show"
+  map.cart '/cart_content', :controller => "pages", :action => "cart_show"
+  map.viewownproducts 'my_products', :controller => "stores", :action => "owned_products"
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

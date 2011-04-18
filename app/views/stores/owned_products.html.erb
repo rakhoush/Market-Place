@@ -1,0 +1,25 @@
+<table>
+
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+	</tr>
+<% @store.products.each do |product|  %>
+<% price = @store.storeproducts.find_by_product_id(product.id).price %>
+	<tr>
+		<td><%= product.name %></td>
+		<td><%= product.description %></td>
+		<td><% form_for(:storeproduct, :url => {:action => "set_price_for_product"}) do |f| %>
+		  
+		    <%= f.text_field :price, :value => "#{price}" %>
+		  	<%= f.hidden_field :store_id, :value => "#{current_user.userable.id}" %>
+			<%= f.hidden_field :product_id, :value => "#{product.id}" %>
+		    <%= f.submit "Set price" %>
+
+		<% end %>
+		</td>
+	</tr>
+
+<% end %>
+	
+</table>

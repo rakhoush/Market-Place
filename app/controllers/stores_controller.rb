@@ -56,5 +56,19 @@ class StoresController < ApplicationController
     redirect_to stores_url
   end
   
+  def owned_products
+    @store = Store.find(current_user.userable_id)
+  end
+  
+  def set_price_for_product
+    store = Store.find(params[:storeproduct][:store_id])
+    sp = store.storeproducts.find_by_product_id(params[:storeproduct][:product_id])
+    sp.price = params[:storeproduct][:price].to_f
+    if sp.save
+      flash[:notice] = "Price was set"
+      redirect_to :back
+    end
+  end
+  
   
 end

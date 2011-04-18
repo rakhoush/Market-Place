@@ -50,4 +50,18 @@ class ProductsController < ApplicationController
     flash[:notice] = "Successfully destroyed product."
     redirect_to products_url
   end
+  
+  #private
+  
+  def add_product_to_store
+   sp = Storeproduct.new(:product_id => params[:product], :store_id => params[:store])
+   if sp.save
+     flash[:notice] = "The product was added succesfully"
+      redirect_to products_path
+    else
+      redirect_to :back
+      flash[:error] = "Something went bad"
+   end
+  end
+  
 end

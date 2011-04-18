@@ -19,7 +19,10 @@
 		<div id="sign-info" style="float:right;">
 			<% if signed_in? %>
 				Welcome, <%= link_to "#{current_user.name.titleize}", identify_user %><br />
-				Not you?, <%= link_to "Sign out", signout_path, :method => :delete %>
+				Not you?, <%= link_to "Sign out", signout_path, :method => :delete %> <br />
+				<% unless current_user.userable.id.nil? %>
+					<%= link_to "View my products", viewownproducts_path%>
+				<% end %>
 			<% else %>
 				<%= link_to "Log in", signin_path %> | <%= link_to "Sign In", signup_path %>
 			<% end  %>

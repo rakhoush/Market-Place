@@ -13,8 +13,11 @@
   <%=h @feed.content %>
 </p>
 
-<p>
-  <%= link_to "Edit", edit_feed_path(@feed) %> |
-  <%= link_to "Destroy", @feed, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", feeds_path %>
-</p>
+<% if signed_in?  %>
+	<% if current_user.admin? %>
+		<p>
+  			<%= link_to "Edit", edit_feed_path(@feed) %> |
+  			<%= link_to "Destroy", @feed, :confirm => 'Are you sure?', :method => :delete %> |
+		</p>
+	<% end %>
+<% end %>

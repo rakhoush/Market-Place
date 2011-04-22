@@ -42,8 +42,13 @@
   </div>
 <% end %>
 
-<p>
-  <%= link_to "Edit", edit_product_path(@product) %> |
-  <%= link_to "Destroy", @product, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", products_path %>
-</p>
+
+	<% if signed_in? %>
+		<% if current_user.admin? %>
+		<p>
+  			<%= link_to "Edit", edit_product_path(@product) %> |
+  			<%= link_to "Destroy", @product, :confirm => 'Are you sure?', :method => :delete %>
+		</p>
+		<% end %>
+	<% end %>
+

@@ -1,0 +1,24 @@
+<h1>Article</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%=h @article.title %>
+</p>
+<p>
+  <strong>Author:</strong>
+  <%=h @article.author %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%=h @article.content %>
+</p>
+
+<p>	
+<% if signed_in? %>
+	<% if current_user.admin? %>	
+  <%= link_to "Edit", edit_article_path(@article) %> |
+  <%= link_to "Destroy", @article, :confirm => 'Are you sure?', :method => :delete %> |
+  	<% end %>
+<% end %>
+  <%= link_to "View All", articles_path %>
+</p>

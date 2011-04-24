@@ -1,6 +1,6 @@
 class AddLimitToDataInSessions < ActiveRecord::Migration
   def self.up
-    change_column :sessions, :data, :text
+    change_column :sessions, :data, :longtext
   end
 
   def self.down

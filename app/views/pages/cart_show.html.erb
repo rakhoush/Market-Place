@@ -4,7 +4,7 @@
 
 <ul>
 	<% for item in @cart.items %>
-		<li><%=h item.name.titleize %></li>
+		<li><%=h item.name.titleize %><%= button_to "Remove from cart", :action => 'remove_from_cart', :id => item.id %></li>
 			<% item.stores.each do |is| %>
 				<%=h is.user.name.titleize  %> - <%=h is.storeproducts.find_by_product_id(item.id).price %><br />
 			<% end %>

@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
       current_item = items.find {|item| item.product == product}
       if current_item
         items.delete_if{|i| i == current_item}
-        redirect_to products_path
+        redirect_to :back
       end
     end
     

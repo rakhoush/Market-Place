@@ -14,6 +14,15 @@ namespace :db do
       
     end
     
+    500.times do |n|
+      product_id = rand(499) + 1
+      store_id = rand(2) + 1
+      price = (n * 2.5) / 0.3
+      Storeproduct.create!(:product_id => product_id,
+                           :store_id => store_id,
+                           :price => price)
+    end
+    
     5000.times do |n|
     author = Faker::Name.name
     content = "Some dummy content from #{author}"
@@ -23,6 +32,15 @@ namespace :db do
                     :content => content,
                     :commentable_id => commentable_id,
                     :commentable_type => commentable_type)
+    end
+    
+    1000.times do |n|
+      author = Faker::Name.name
+      content = "Some dummy content from #{author}"
+      title = "Title for article #{n+1}"
+      Article.create!(:author => author,
+                      :title => title,
+                      :content => content)
     end
     
   end

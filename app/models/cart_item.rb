@@ -18,5 +18,13 @@ class CartItem
   def price
     @product.price * @quantity
   end
+  
+  def stores
+    @product.stores
+  end
+  
+  def id
+    @product.id
+  end
 
 end

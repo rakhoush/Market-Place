@@ -4,7 +4,10 @@
 
 <ul>
 	<% for item in @cart.items %>
-		<li><%= item.quantity %> &times; <%=h item.name.titleize %></li>
+		<li><%=h item.name.titleize %></li>
+			<% item.stores.each do |is| %>
+				<%=h is.user.name.titleize  %> - <%=h is.storeproducts.find_by_product_id(item.id).price %><br />
+			<% end %>
 		<% end %>
 </ul>
 

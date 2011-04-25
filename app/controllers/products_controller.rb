@@ -7,8 +7,10 @@ class ProductsController < ApplicationController
     
     if params[:category].nil? || params[:category].blank?
       @products = Product.all
+      @title = "All"
     else
       @category = Category.find(params[:category])
+      @title = @category.name.titleize
       @products = Product.find(:all, :conditions => {:category_id => params[:category]})
     end
     

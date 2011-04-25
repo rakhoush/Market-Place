@@ -43,3 +43,30 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+####################################################################################
+# Configuracion del gmail                                                          #
+require 'tlsmail'                                                                  #
+                                                                                   #                                   #
+# Gmail utiliza TLS, por lo que se habilita primero                                #
+Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)                                    #
+# El método de entrega es smtp                                                     #
+ActionMailer::Base.delivery_method = :smtp    
+ActionMailer::Base.default_content_type = "text/html"                                     #
+# Se envían los correos                                                            #
+ActionMailer::Base.perform_deliveries = true                                       #
+# El charset por default                                                           #
+ActionMailer::Base.default_charset = "utf-8"                                       #
+# Se muestran errores de entrega de correo                                         #
+ActionMailer::Base.raise_delivery_errors = true                                    #
+# Se configuran las propiedades de entrega de SMTP                                 #
+ActionMailer::Base.smtp_settings = {                                               #
+  :domain          => "aktestcontact@gmail.com",                                   #
+  :address         => 'smtp.gmail.com',                                            #
+  :port            => 587,                                                         #
+  :tls             => true,                                                        #
+  :authentication  => :plain,                                                      #
+  :user_name       => 'aktestcontact@gmail.com',                                   #
+  :password        => 'cwiolcpd'                                               #
+}                                                                                  #
+####################################################################################

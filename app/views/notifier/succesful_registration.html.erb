@@ -1,0 +1,25 @@
+<h1>Welcome to MarketPlace</h1>
+
+<p>Your details are:</p>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Zip</th>
+		<th>Street</th>
+		<th>Number</th>
+		<th>District</th>
+	</tr>
+	
+	<tr>
+		<td><%= @store.user.name %></td>
+		<td><%= @store.user.email %></td>
+		<td><%= @store.zip %></td>
+		<td><%= @store.street %></td>
+		<td><%= @store.number %></td>
+		<td><%= @store.district %></td>
+	</tr>
+</table>
+
+<h1>Thanks for registration</h1>

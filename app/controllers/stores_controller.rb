@@ -24,6 +24,7 @@ class StoresController < ApplicationController
     @store = Store.new(params[:store])
     @user = @store.build_user(params[:user])
     if @store.save
+      Notifier.deliver_succesful_registration(@store)
       sign_in @user
       flash[:notice] = "Welcome back #{@user.name.titleize}"
       redirect_to @store

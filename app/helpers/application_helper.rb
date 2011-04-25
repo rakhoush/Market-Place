@@ -19,4 +19,9 @@ module ApplicationHelper
    end
   end
   
+
+  def categories
+    @categories = Category.find(:all, :select => "id, name")
+  end
+  
 end

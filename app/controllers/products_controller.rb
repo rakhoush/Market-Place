@@ -4,7 +4,14 @@ class ProductsController < ApplicationController
   
   def index
     @cart = find_cart
-    @products = Product.all
+    
+    if params[:category].nil? || params[:category].blank?
+      @products = Product.all
+    else
+      @category = Category.find(params[:category])
+      @products = Product.find(:all, :conditions => {:category_id => params[:category]})
+    end
+    
   end
 
   def show

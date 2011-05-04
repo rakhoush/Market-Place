@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   include SessionsHelper
   include ProductsHelper
+  helper_method :find_by_store_and_product_id
+  # Scrub sensitive parameters from your log
+  filter_parameter_logging :password
   protect_from_forgery :secret => '8fc080370e56e929a2d5afca5540a0f7'# See ActionController::RequestForgeryProtection for details
+  
 
     def authenticate
       deny_access unless signed_in?
@@ -58,7 +62,4 @@ class ApplicationController < ActionController::Base
       redirect_to products_path
     end
     
-    
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
 end

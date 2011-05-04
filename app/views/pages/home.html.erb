@@ -1,4 +1,53 @@
+<script type="text/javascript">
+	
+	function get_price_first_column(id) {
+		var price = 0;
+		$('table#product_table_' + id + ' tr').each(function() {
+				var td_value = $(this).find("td").eq(1).html();
+				price = td_value.split("::");
+		});
+		return price[1].split("$")[1];
+	}
+	
+	function get_price_second_column(id) {
+		var price = 0;
+		$('table#product_table_' + id + ' tr').each(function() {
+				var td_value = $(this).find("td").eq(2).html();
+				if (td_value == null){
+					price = 0;
+				}else{
+					price = td_value.split("::")[1].split("$")[1];
+				}
+				
+		});
+		return price;
+	}
+	
+	
+</script>
+
 <h1>MarketPlace Home Page</h1>
+<h2>Products</h2>
+
+<% @products.each do |product| %>
+	<% if is_related?(product) %>
+	<table border="1" id="product_table_<%= product.id %>">
+		<tr>
+			<td><%= product.name %></td>
+			<% product.stores.each do |store| %>
+					<td><%= store.user.name.titleize %> :: <%= number_to_currency(Storeproduct.find_by_store_and_product_id(store.id, product.id).price) %></td>
+			<% end %>
+		</tr>
+	</table>
+	<p id="difference_<%= product.id %>">
+		<script>
+			$('p#difference_<%= product.id %>').html(Math.abs(get_price_first_column(<%= product.id %>) - get_price_second_column(<%= product.id %>))).prepend("$");
+		</script>
+	</p>
+	<br />
+	<% end %>
+<% end %>
+
 <br />
 <h2>News Feeds</h2>
 <% @feeds.each do |feed|  %>
@@ -19,3 +68,4 @@
 		<%= link_to "List of news", feeds_path %> |
 	<% end  %>
 <% end %>
+

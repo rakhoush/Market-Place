@@ -24,4 +24,14 @@ module ApplicationHelper
     @categories = Category.find(:all, :select => "id, name")
   end
   
+  def is_related?(product)
+    if Storeproduct.find_by_product_id(product.id)
+      true
+    else
+      false
+    end
+  end
+  
+  
+  
 end

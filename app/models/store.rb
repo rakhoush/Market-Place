@@ -17,7 +17,7 @@ class Store < ActiveRecord::Base
   #Database relations
   has_one :user, :as => :userable, :dependent => :destroy
   has_many :products, :through => :storeproducts
-  has_many :storeproducts
+  has_many :storeproducts, :dependent => :destroy
   accepts_nested_attributes_for :user
   
   attr_accessible :name, :user_attributes

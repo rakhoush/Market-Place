@@ -23,6 +23,14 @@
 		return price;
 	}
 	
+	function get_lowest_price_product(priceOne, priceTwo) {
+		
+		if (parseFloat(priceTwo) == 0 || parseFloat(priceOne) < parseFloat(priceTwo)) {
+			return 1;
+		} else {
+			return 2;
+		}
+	}
 	
 </script>
 
@@ -41,7 +49,7 @@
 	</table>
 	<p id="difference_<%= product.id %>">
 		<script>
-			$('p#difference_<%= product.id %>').html(Math.abs(get_price_first_column(<%= product.id %>) - get_price_second_column(<%= product.id %>))).prepend("$");
+			$('p#difference_<%= product.id %>').html("The winner is " + $('table#product_table_<%= product.id %> tr').find("td").eq(get_lowest_price_product(get_price_first_column(<%= product.id %>),get_price_second_column(<%= product.id %>))).html());
 		</script>
 	</p>
 	<br />

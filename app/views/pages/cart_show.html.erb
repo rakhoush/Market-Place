@@ -3,12 +3,30 @@
 <h3>You have <%= pluralize(@cart.all_items, "item") %> in the cart</h3>
 
 <ul>
+	<% prices = Array.new %>
 	<% for item in @cart.items %>
+	
 		<li><%=h item.name.titleize %><%= button_to "Remove from cart", :action => 'remove_from_cart', :id => item.id %></li>
 			<% item.stores.each do |is| %>
-				<%=h is.user.name.titleize  %> - <%=h is.storeproducts.find_by_product_id(item.id).price %><br />
+				<% prices << is %>
+				<%=h is.user.name.titleize  %> - <span id="product_<%= item.id %>"><%=h is.storeproducts.find_by_product_id(item.id).price %></span><br />
 			<% end %>
-		<% end %>
+			
+			<p id="winner_<%= item.id %>">
+				<% if prices.size == 1 %>
+					The winner is <%= prices[0].user.name.titleize %>
+				<% elsif prices.size == 2 %>
+					<% if prices[0].storeproducts.find_by_product_id(item.id).price < prices[1].storeproducts.find_by_product_id(item.id).price%>
+						The winner is <%= prices[0].user.name.titleize %>
+					<% else %>
+						The winner is <%= prices[1].user.name.titleize %>
+					<% end %>
+				<% end %>
+			</p>
+			 
+			<% prices = [] %>
+			
+	<% end %>
 </ul>
 
 <%= button_to 'Empty cart', :action => 'empty_cart' %>

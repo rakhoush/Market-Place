@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
       product = Product.find(params[:id])
       @cart = find_cart
       @cart.add_product(product)
-      redirect_to products_path
+      redirect_to :back
     rescue ActiveRecord::RecordNotFound
       logger.error("Attempt to access invalid product #{params[:id]}" )
       flash[:error] = "Can't add the product because is invalid"

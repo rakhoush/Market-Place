@@ -14,12 +14,12 @@
 			
 			<p id="winner_<%= item.id %>">
 				<% if prices.size == 1 %>
-					The winner is <%= prices[0].user.name.titleize %>
+					<%= prices[0].user.name.titleize %> is cheaper in total.
 				<% elsif prices.size == 2 %>
-					<% if prices[0].storeproducts.find_by_product_id(item.id).price < prices[1].storeproducts.find_by_product_id(item.id).price%>
-						The winner is <%= prices[0].user.name.titleize %>
+					<% if prices[0].storeproducts.find_by_product_id(item.id).price < prices[1].storeproducts.find_by_product_id(item.id).price %>
+						<%= prices[0].user.name.titleize %> is cheaper in total. You save <%= number_to_currency((prices[0].storeproducts.find_by_product_id(item.id).price - prices[1].storeproducts.find_by_product_id(item.id).price).abs) %> to switch!
 					<% else %>
-						The winner is <%= prices[1].user.name.titleize %>
+						<%= prices[1].user.name.titleize %> is cheaper in total. You save <%= number_to_currency((prices[0].storeproducts.find_by_product_id(item.id).price - prices[1].storeproducts.find_by_product_id(item.id).price).abs) %> to switch!
 					<% end %>
 				<% end %>
 			</p>

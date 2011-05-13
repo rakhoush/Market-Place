@@ -62,13 +62,14 @@ class StoresController < ApplicationController
   end
   
   def set_price_for_product
-    store = Store.find(params[:storeproduct][:store_id])
-    sp = store.storeproducts.find_by_product_id(params[:storeproduct][:product_id])
-    sp.price = params[:storeproduct][:price].to_f
-    if sp.save
-      flash[:notice] = "Price was set"
-      redirect_to :back
+    store = Store.find(params[:store_id])
+    params[:product_ids].each_with_index do |p, i|
+      sp = store.storeproducts.find_by_product_id(p)
+      sp.price = params[:prices][i]
+      sp.save
     end
+    flash[:notice] = "Prices were set"
+    redirect_to :back
   end
   
   
